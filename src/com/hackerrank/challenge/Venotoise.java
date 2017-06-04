@@ -9,32 +9,30 @@ import java.util.regex.*;
 public class Venotoise {
 
     static int whoGetsTheCatch(int n, int x, int[] X, int[] V) {
-        int [] results = new int[n];
-        int catcher = 0;
-        for (int i = 0; i < n; i++) {
-            if(x == X[i]) {
-                return i;
-            }
+        int [] catchSeconds = new int[n];
+        for(int i = 0; i < n; i++) {
             int distance = 0;
-            if (x > X[i]) {
+            if(x > X[i]) {
                 distance = x - X[i];
             } else {
                 distance = X[i] - x;
             }
-            int catchSeconds = distance / V[i];
-            results[i] = catchSeconds;
-            for (int j = 0; j < i; j++) {
-                if (results[i] == results[j]) {
-                    return -1;
-                }
-                if(results[i] < results[j]) {
-                    catcher = i;
-                } else {
-                    catcher = j;
-                }
+            catchSeconds[i] = distance / V[i];
+        }
+        int min = catchSeconds[0];
+        int minIndex = 0;
+        for(int i = 1; i < catchSeconds.length; i++) {
+            if(catchSeconds[i] < min) {
+                min = catchSeconds[i];
+                minIndex = i;
             }
         }
-        return catcher;
+        for(int i = 0; i < catchSeconds.length; i++) {
+            if(minIndex != i && catchSeconds[i] == min) {
+                return -1;
+            }
+        }
+        return minIndex;
     }
 
     public static void main(String[] args) {
