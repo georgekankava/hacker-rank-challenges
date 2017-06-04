@@ -6,7 +6,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-public class Solution {
+public class Venotoise {
 
     static int whoGetsTheCatch(int n, int x, int[] X, int[] V) {
         int [] results = new int[n];
